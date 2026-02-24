@@ -5,9 +5,9 @@ import pandas as pd
 import yfinance as yf
 from fredapi import Fred
 
-from apac_pipeline.config.markets import MACRO_INDICATORS
-from apac_pipeline.config.settings import EQUITY_UNIVERSE, FRED_API_KEY, RAW_DATA_PATH
-from apac_pipeline.pipeline.logger import get_logger
+from data_pipeline.config.markets import MACRO_INDICATORS
+from data_pipeline.config.settings import EQUITY_UNIVERSE, FRED_API_KEY, RAW_DATA_PATH
+from data_pipeline.pipeline.logger import get_logger
 
 logger = get_logger(__name__)
 

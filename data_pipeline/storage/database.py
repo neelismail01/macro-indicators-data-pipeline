@@ -5,8 +5,8 @@ import psycopg2
 import psycopg2.extras
 from supabase import create_client, Client
 
-from apac_pipeline.config.settings import SUPABASE_URL, SUPABASE_KEY, DATABASE_URL
-from apac_pipeline.pipeline.logger import get_logger
+from data_pipeline.config.settings import SUPABASE_URL, SUPABASE_KEY, DATABASE_URL
+from data_pipeline.pipeline.logger import get_logger
 
 logger = get_logger(__name__)
 

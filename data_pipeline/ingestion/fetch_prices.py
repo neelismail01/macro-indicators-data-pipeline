@@ -4,8 +4,8 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
-from apac_pipeline.config.settings import EQUITY_UNIVERSE, RAW_DATA_PATH
-from apac_pipeline.pipeline.logger import get_logger
+from data_pipeline.config.settings import EQUITY_UNIVERSE, RAW_DATA_PATH
+from data_pipeline.pipeline.logger import get_logger
 
 logger = get_logger(__name__)
 

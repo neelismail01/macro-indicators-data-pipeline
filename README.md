@@ -1,10 +1,10 @@
-# APAC Macro Indicators Data Pipeline
+# Macro Indicators Data Pipeline
 
 ## Overview
 
-This pipeline collects, validates, and stores macroeconomic and equity price data for four major APAC markets: Japan (JP), Hong Kong (HK), South Korea (KR), and Taiwan (TW). The goal is to support systematic macro investment research by maintaining a clean, queryable time-series database spanning from 2015 onward.
+This pipeline collects, validates, and stores macroeconomic and equity price data for four major markets: Japan (JP), Hong Kong (HK), South Korea (KR), and Taiwan (TW). The goal is to support systematic macro investment research by maintaining a clean, queryable time-series database spanning from 2015 onward.
 
-Data is sourced from two complementary providers. The Federal Reserve Economic Data (FRED) API supplies monetary policy rates, inflation (CPI), 10-year government bond yields, and FX rates against the USD — all critical inputs for relative-value and carry-trade strategies across APAC fixed income and currency markets. Yahoo Finance supplements with equity index levels and individual stock OHLCV data, enabling analysis of equity risk premia alongside macro conditions. Together, these sources provide the raw material for cross-asset regime detection, factor decomposition, and policy-driven event studies.
+Data is sourced from two complementary providers. The Federal Reserve Economic Data (FRED) API supplies monetary policy rates, inflation (CPI), 10-year government bond yields, and FX rates against the USD — all critical inputs for relative-value and carry-trade strategies across fixed income and currency markets. Yahoo Finance supplements with equity index levels and individual stock OHLCV data, enabling analysis of equity risk premia alongside macro conditions. Together, these sources provide the raw material for cross-asset regime detection, factor decomposition, and policy-driven event studies.
 
 The pipeline is designed for incremental daily updates and a one-time historical backfill. All data lands in a local DuckDB database, which is optimised for analytical queries and requires no external server infrastructure. The cleaning layer enforces trading-calendar alignment and basic price sanity checks before any data is written to the database.
 
@@ -33,24 +33,24 @@ cp .env.example .env
 ### Initial historical load (2015-01-01 to today)
 
 ```bash
-python -m apac_pipeline.pipeline.run_daily --historical
+python -m data_pipeline.pipeline.run_daily --historical
 ```
 
 ### Daily update (today only)
 
 ```bash
-python -m apac_pipeline.pipeline.run_daily
+python -m data_pipeline.pipeline.run_daily
 ```
 
 ---
 
 ## Querying the database
 
-The database is stored at `data/apac_pipeline.duckdb`. Open it with the DuckDB CLI or query it from Python:
+The database is stored at `data/data_pipeline.duckdb`. Open it with the DuckDB CLI or query it from Python:
 
 ```python
 import duckdb
-conn = duckdb.connect("data/apac_pipeline.duckdb")
+conn = duckdb.connect("data/data_pipeline.duckdb")
 
 # Latest closing prices for all JP tickers
 conn.execute("""
