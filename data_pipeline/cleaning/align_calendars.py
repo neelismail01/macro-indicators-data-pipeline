@@ -1,8 +1,8 @@
 import exchange_calendars as ec
 import pandas as pd
 
-from apac_pipeline.config.markets import MARKET_METADATA
-from apac_pipeline.pipeline.logger import get_logger
+from data_pipeline.config.markets import MARKET_METADATA
+from data_pipeline.pipeline.logger import get_logger
 
 logger = get_logger(__name__)
 

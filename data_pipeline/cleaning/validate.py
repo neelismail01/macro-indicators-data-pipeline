@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from apac_pipeline.pipeline.logger import get_logger
+from data_pipeline.pipeline.logger import get_logger
 
 logger = get_logger(__name__)
 

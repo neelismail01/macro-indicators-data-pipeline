@@ -1,4 +1,4 @@
-"""Smoke tests for the APAC macro pipeline."""
+"""Smoke tests for the macro pipeline."""
 from __future__ import annotations
 
 from datetime import date, timedelta
@@ -6,11 +6,11 @@ from datetime import date, timedelta
 import pandas as pd
 import pytest
 
-from apac_pipeline.cleaning.align_calendars import filter_to_trading_days
-from apac_pipeline.cleaning.validate import validate_prices
-from apac_pipeline.ingestion.fetch_macro import fetch_macro_indicators
-from apac_pipeline.ingestion.fetch_prices import fetch_equity_prices
-from apac_pipeline.storage.database import initialize_schema, query
+from data_pipeline.cleaning.align_calendars import filter_to_trading_days
+from data_pipeline.cleaning.validate import validate_prices
+from data_pipeline.ingestion.fetch_macro import fetch_macro_indicators
+from data_pipeline.ingestion.fetch_prices import fetch_equity_prices
+from data_pipeline.storage.database import initialize_schema, query
 
 _TODAY = str(date.today())
 _FIVE_DAYS_AGO = str(date.today() - timedelta(days=7))  # extra buffer for weekends
@@ -27,8 +27,8 @@ EXPECTED_TABLES = {
 
 
 def test_schema_initialization(tmp_path, monkeypatch):
-    monkeypatch.setattr("apac_pipeline.config.settings.DB_PATH", tmp_path / "test.duckdb")
-    import apac_pipeline.storage.database as db_module
+    monkeypatch.setattr("data_pipeline.config.settings.DB_PATH", tmp_path / "test.duckdb")
+    import data_pipeline.storage.database as db_module
     monkeypatch.setattr(db_module, "DB_PATH", tmp_path / "test.duckdb")
 
     initialize_schema()

@@ -8,14 +8,14 @@ from datetime import date, datetime
 import pandas as pd
 from prefect import flow, task
 
-from apac_pipeline.cleaning.align_calendars import filter_to_trading_days
-from apac_pipeline.cleaning.validate import validate_macro, validate_prices
-from apac_pipeline.config.markets import MARKET_METADATA
-from apac_pipeline.config.settings import START_DATE
-from apac_pipeline.ingestion.fetch_macro import fetch_corporate_actions, fetch_macro_indicators
-from apac_pipeline.ingestion.fetch_prices import fetch_equity_prices
-from apac_pipeline.pipeline.logger import get_logger
-from apac_pipeline.storage.database import initialize_schema, insert_dataframe, query
+from data_pipeline.cleaning.align_calendars import filter_to_trading_days
+from data_pipeline.cleaning.validate import validate_macro, validate_prices
+from data_pipeline.config.markets import MARKET_METADATA
+from data_pipeline.config.settings import START_DATE
+from data_pipeline.ingestion.fetch_macro import fetch_corporate_actions, fetch_macro_indicators
+from data_pipeline.ingestion.fetch_prices import fetch_equity_prices
+from data_pipeline.pipeline.logger import get_logger
+from data_pipeline.storage.database import initialize_schema, insert_dataframe, query
 
 logger = get_logger(__name__)
 
@@ -58,7 +58,7 @@ def validate_and_store_macro_task(df: pd.DataFrame) -> int:
     return insert_dataframe(df[cols], "macro_indicators")
 
 
-@flow(name="APAC Daily Pipeline")
+@flow(name="Macro Data Daily Pipeline")
 def run_pipeline(
     start_date: str | None = None,
     end_date: str | None = None,
@@ -101,7 +101,7 @@ def run_pipeline(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="APAC macro pipeline")
+    parser = argparse.ArgumentParser(description="Macro data pipeline")
     parser.add_argument(
         "--historical",
         action="store_true",
