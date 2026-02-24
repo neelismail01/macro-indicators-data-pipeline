@@ -5,9 +5,11 @@ import os
 load_dotenv()
 
 FRED_API_KEY: str = os.environ["FRED_API_KEY"]
+SUPABASE_URL: str = os.environ["SUPABASE_URL"]
+SUPABASE_KEY: str = os.environ["SUPABASE_KEY"]
+DATABASE_URL: str = os.environ["DATABASE_URL"]
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DB_PATH = BASE_DIR / "data" / "apac_pipeline.duckdb"
 RAW_DATA_PATH = BASE_DIR / "data" / "raw"
 CLEAN_DATA_PATH = BASE_DIR / "data" / "cleaned"
 
